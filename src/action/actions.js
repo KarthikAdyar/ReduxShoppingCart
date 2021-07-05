@@ -16,3 +16,13 @@ export const deleteToCart = ( id ) => ({
     type:"DELETE_ITEM",
     payload:id
 })
+
+export const incrementQuantity = ( id ) => ({
+    type:"INCREMENT_QTY",
+    payload:id
+})
+
+export const decrementQuantity = (id) => ({
+    type:"DECREMENT_QTY",
+    payload:id
+})
