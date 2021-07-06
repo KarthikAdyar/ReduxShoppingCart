@@ -1,25 +1,25 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import Products from './components/Products';
-import {BrowserRouter , Switch , Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Cart from './components/Cart'
 function App() {
-  return(
+  return (
     <>
-    <BrowserRouter>
-    <div>
-      <Navbar />
-    
-    </div>
+      <BrowserRouter>
+        <div>
+          <Navbar />
 
-    
-      <Switch>
-        <Route exact path='/' component= {Products} />
-        <Route exact path='/cart' component={Cart}/>
-        
-      </Switch>
-    </BrowserRouter>
+        </div>
+
+
+        <Switch>
+          <Route exact path='/' component={Products} />
+          <Route exact path='/cart' component={Cart} />
+
+        </Switch>
+      </BrowserRouter>
     </>
-    )
+  )
 }
 export default App;
