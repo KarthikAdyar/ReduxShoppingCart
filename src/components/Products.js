@@ -10,6 +10,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
+import CartCounter from './CartCounter';
+
 const useStyles = makeStyles({
     root: {
         maxWidth: 400,
@@ -20,6 +22,9 @@ const useStyles = makeStyles({
     },
     main: {
         flexGrow: 1
+    },
+    addtocart:{
+      marginLeft:"34%"
     }
 });
 
@@ -68,10 +73,12 @@ const Products = () => {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button onClick={() => addtoCart(item.id)} size="small" color="primary" variant="outlined">
+                                <Button className={classes.addtocart} onClick={() => addtoCart(item.id)} size="small" color="primary" variant="outlined">
                                     Add to Cart
                                 </Button>
                             </CardActions>
+                            
+                            <CartCounter id ={item.id} />
                         </Card>
 
                     )}

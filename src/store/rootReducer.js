@@ -28,7 +28,7 @@ const rootReducer = (state = initialState, action) => {
 
         case "INCREMENT_QTY":
             let index = state.cartProducts.findIndex(index => index.id === action.payload)
-
+            
             return {
                 ...state,
                 cartProducts:
@@ -37,6 +37,8 @@ const rootReducer = (state = initialState, action) => {
                     }, ...state.cartProducts.slice(index + 1)]
 
             }
+        
+        
         case "DECREMENT_QTY":
             let index_ = state.cartProducts.findIndex(index => index.id === action.payload)
             if (state.cartProducts[index_].quantity > 1) {

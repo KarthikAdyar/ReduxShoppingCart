@@ -3,16 +3,18 @@ import { useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { decrementQuantity, deleteToCart, incrementQuantity } from '../store/actions';
+import { deleteToCart } from '../store/actions';
 import { Card } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
-
+import CartCounter from './CartCounter';
 const useStyles = makeStyles({
     root: {
         width: "350px",
         marginTop: "20px",
+        marginLeft:"60px",
+        marginRight:"10px"
     },
     btn_delete: {
         marginLeft: "50px"
@@ -28,10 +30,11 @@ const useStyles = makeStyles({
         marginRight: "10%",
         marginBottom:"3%",
         height:"90%",
-        
-    },
+        width:"400px"
+        },
     order:{
-      
+      display:"flex",
+      justifyContent:"center"
     }
 
 })
@@ -39,14 +42,7 @@ const Cart = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const handleIncrement = (id) => {
-
-        dispatch(incrementQuantity(id))
-    }
-
-    const handleDecrement = (id) => {
-        dispatch(decrementQuantity(id))
-    }
+  
     const handleDelete = (id) => {
         dispatch(deleteToCart(id))
     }
@@ -67,7 +63,9 @@ const Cart = () => {
                 <br />
                 <br />
                 <br />
-                <div> <h2>Your cart has {count} items and the total price is &#8377; {totalPrice.toFixed(2)}</h2></div>
+                <div className={classes.order}> 
+                <h2>Your cart has {count} items and the total price is &#8377; {totalPrice.toFixed(2)}</h2>
+                </div>
                 
                 <div className={classes.order}>
                     <Button  variant="contained" color="primary">Place your order</Button>
@@ -90,13 +88,7 @@ const Cart = () => {
 
 
                             <p className="text-danger"><b>&#8377;{item.price}</b></p>
-
-                            <div>
-                                <Button className={classes.left_btn} color="secondary" onClick={() => handleDecrement(item.id)} variant="outlined"> - </Button>
-                                <span className={classes.qty}><strong>Quantity: {item.quantity}</strong></span>
-                                <Button onClick={() => handleIncrement(item.id)} variant="outlined" color="primary"> + </Button>
-                            </div>
-
+                            <div><CartCounter id ={ item.id}/></div>
                             <br />
                             <p className="text-danger" style={{ marginLeft: "20%" }}>Total amount: <b>&#8377;{(item.quantity * item.price).toFixed(2)}</b></p>
 
