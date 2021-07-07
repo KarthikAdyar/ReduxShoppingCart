@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { decrementQuantity, deleteToCart, incrementQuantity } from '../action/actions';
+import { decrementQuantity, deleteToCart, incrementQuantity } from '../store/actions';
 import { Card } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
@@ -23,6 +23,15 @@ const useStyles = makeStyles({
     },
     left_btn: {
         marginLeft: "10%"
+    },
+    card:{
+        marginRight: "10%",
+        marginBottom:"3%",
+        height:"90%",
+        
+    },
+    order:{
+      
     }
 
 })
@@ -59,10 +68,16 @@ const Cart = () => {
                 <br />
                 <br />
                 <div> <h2>Your cart has {count} items and the total price is &#8377; {totalPrice.toFixed(2)}</h2></div>
+                
+                <div className={classes.order}>
+                    <Button  variant="contained" color="primary">Place your order</Button>
+                </div>
+                <div>
+                <Grid  container direction="row" justify="flex-start" alignItems="center" >
                 {selected.map(item =>
                     <div className={classes.root} key={item.id}>
 
-                        <Card >
+                        <Card className={classes.card}>
 
                             <Typography variant="h5" color="textSecondary" component="h2">
                                 {item.title}
@@ -88,6 +103,8 @@ const Cart = () => {
                         </Card>
 
                     </div>)}
+                    </Grid>
+                    </div>
 
             </>)
     }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
-import { addProducts, addToCart } from '../action/actions'
+import { addProducts, addToCart } from '../store/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
