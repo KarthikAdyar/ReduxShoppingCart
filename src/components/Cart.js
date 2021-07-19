@@ -1,14 +1,16 @@
-import React from 'react'
+import React , { useState }from 'react'
+import { Link } from 'react-router-dom' 
 import { useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { deleteToCart } from '../store/actions';
+import { deleteToCart  , deleteCartItems } from '../store/actions';
 import { Card } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 import CartCounter from './CartCounter';
+import StripeCheckout from 'react-stripe-checkout'
 const useStyles = makeStyles({
     root: {
         width: "350px",
@@ -42,11 +44,14 @@ const Cart = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-  
+    const [display , setDisplay] = useState(false);
     const handleDelete = (id) => {
         dispatch(deleteToCart(id))
     }
 
+    
+
+    
     const selected = useSelector(state => state.cartProducts)
 
     let totalPrice = 0;
@@ -56,8 +61,14 @@ const Cart = () => {
         count += i.quantity
     }
 
+    const getToken = (token) => {
+        console.log(token);
+        setDisplay(true);
+        dispatch(deleteCartItems())
+        
+    }
 
-    if (selected.length > 0) {
+    if (selected.length > 0 && display === false) {
         return (
             <>
                 <br />
@@ -68,7 +79,15 @@ const Cart = () => {
                 </div>
                 
                 <div className={classes.order}>
-                    <Button  variant="contained" color="primary">Place your order</Button>
+                    
+                    <StripeCheckout 
+                    label="Place your order here"
+                    billingAddress
+                    shippingAddress
+                    stripeKey="pk_test_51BTUDGJAJfZb9HEBwDg86TN1KNprHjkfipXmEDMb0gSCassK5T3ZfxsAbcgKVmAIXF7oZ6ItlZZbXO6idTHE67IM007EwQ4uN3"
+                    panelLabel = {`Pay ${totalPrice}`}
+                    token={getToken}
+                    />
                 </div>
                 <div>
                 <Grid  container direction="row" justify="flex-start" alignItems="center" >
@@ -96,9 +115,20 @@ const Cart = () => {
 
                     </div>)}
                     </Grid>
+                    
                     </div>
 
             </>)
+    }
+    else if(display === true){
+      
+        return(
+            <>
+                <br/><br /><br />
+                <h1 className="text-success">Successfully booked</h1>
+                <Link to="/" className="btn btn-primary">Go to Home</Link>
+            </>
+        )
     }
     else {
         return (

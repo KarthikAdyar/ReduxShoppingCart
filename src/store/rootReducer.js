@@ -64,6 +64,10 @@ const rootReducer = (state = initialState, action) => {
             else {
                 return state
             }
+        case "DELETE_CART":
+            return {
+                ...state , cartProducts:[]
+            }
         default:
             return state;
     }

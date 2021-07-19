@@ -24,3 +24,7 @@ export const decrementQuantity = (id) => ({
     type: "DECREMENT_QTY",
     payload: id
 })
+
+export const deleteCartItems = () => ({
+    type:"DELETE_CART"
+})
