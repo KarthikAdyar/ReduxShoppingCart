@@ -38,7 +38,7 @@ const Navbar = () => {
 
                     </Typography>
 
-                    <Link to="/" className={classes.title}  >
+                    <Link to="/ReduxShoppingCart" className={classes.title}  >
                         <IconButton style={{ color: "white" }} ><HomeIcon /></IconButton>
                     </Link>
 
